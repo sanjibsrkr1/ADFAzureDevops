@@ -194,6 +194,22 @@
 						"typeProperties": {
 							"waitTimeInSeconds": 2
 						}
+					},
+					{
+						"name": "ADF_TEST",
+						"type": "Wait",
+						"dependsOn": [
+							{
+								"activity": "Copy data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 5
+						}
 					}
 				],
 				"annotations": []
