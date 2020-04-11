@@ -1,0 +1,19 @@
+{
+	"name": "SQLConn",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=adflearningdev.database.windows.net;Initial Catalog=SandBox;User ID=adflearner",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVaultAccountkey",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SQLPwd"
+			}
+		}
+	}
+}
