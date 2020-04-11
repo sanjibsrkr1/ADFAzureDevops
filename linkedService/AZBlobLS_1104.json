@@ -1,0 +1,17 @@
+{
+	"name": "AZBlobLS_1104",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVaultAccountkey",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "accountkeystoragescret"
+			}
+		}
+	}
+}
