@@ -1,0 +1,30 @@
+{
+	"name": "DS_Amit_BlbStg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AZBlobLS_1104",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EmpData.csv",
+				"folderPath": "Source",
+				"container": "sharedpath"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}

@@ -1,0 +1,29 @@
+{
+	"name": "DS_Amit_Dest_BlbSTG",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AZBlobLS_1104",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Destination",
+				"container": "sharedpath"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}
