@@ -4,7 +4,17 @@
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "https://azuredevopsstoragedev.dfs.core.windows.net"
+			"url": "https://azuredevopsstoragedev.dfs.core.windows.net",
+			"tenant": "2c1a2940-1a7c-4259-bdb1-acb301e5958b",
+			"servicePrincipalId": "d1e1fcd5-55e7-4af5-a70e-6b4c06682dd6",
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVaultServicePrincipal",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "secretserviceprincipal"
+			}
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/linkedservices"
