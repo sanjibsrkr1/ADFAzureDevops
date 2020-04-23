@@ -94,12 +94,6 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Set variable",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "Set variable_copy1",
 						"dependencyConditions": [
 							"Succeeded"
@@ -120,13 +114,6 @@
 						"empid": {
 							"value": {
 								"value": "@variables('EmpID')",
-								"type": "Expression"
-							},
-							"type": "String"
-						},
-						"Name": {
-							"value": {
-								"value": "@variables('EmpName')",
 								"type": "Expression"
 							},
 							"type": "String"
@@ -153,32 +140,12 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "  select name,Empid from [dbo].[Emp]\n  where sal=(select max(sal) from dbo.emp)",
+						"sqlReaderQuery": "  select name,Empid,last_update_date from [dbo].[Emp]\n  where sal=(select max(sal) from dbo.emp)",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "LookUp",
 						"type": "DatasetReference"
-					}
-				}
-			},
-			{
-				"name": "Set variable",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Lookup1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "EmpName",
-					"value": {
-						"value": "@activity('Lookup1').output.firstrow.name",
-						"type": "Expression"
 					}
 				}
 			},
@@ -201,6 +168,117 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Set variable",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "EmpID",
+					"value": {
+						"value": "@substring(activity('Lookup1').output.firstrow.last_update_date,0,10)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Copy data_copy1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set variable",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "@concat('select * from [dbo].[Emp]\n  where last_update_date>','''',variables('Last_Update_Date'),'''')",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Empid",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Empid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Sal",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Sal",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Last_Update_Date",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Last_Update_Date",
+									"type": "DateTime"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AzureSqlTable3",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable4",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"variables": {
@@ -211,6 +289,10 @@
 			"EmpID": {
 				"type": "String",
 				"defaultValue": "100"
+			},
+			"Last_Update_Date": {
+				"type": "String",
+				"defaultValue": "2020-01-01"
 			}
 		},
 		"annotations": []
