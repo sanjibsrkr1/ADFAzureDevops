@@ -5,11 +5,53 @@
 		"factoryName": {
 			"value": "AzureDevopsDFDev"
 		},
+		"AzureSqlDatabase_connectionString": {
+			"value": ""
+		},
+		"Demo_Linkd_Service_DL_accountKey": {
+			"value": ""
+		},
+		"Office365_servicePrincipalKey": {
+			"value": ""
+		},
+		"SQLConn_connectionString": {
+			"value": ""
+		},
 		"AzureKeyVaultAccountkey_properties_typeProperties_baseUrl": {
 			"value": "https://AzureDevopsKeyValultDev.vault.azure.net/"
 		},
+		"AzureKeyVaultSQL_properties_typeProperties_baseUrl": {
+			"value": "https://AzureDevopsKeyValultDev.vault.azure.net/"
+		},
+		"AzureKeyVaultServicePrincipal_properties_typeProperties_baseUrl": {
+			"value": "https://demo111.vault.azure.net/"
+		},
 		"AzureVaultWithKey_properties_typeProperties_connectionString_secretName": {
 			"value": "accountkeystoragescret"
+		},
+		"Conn_Service_Principal_properties_typeProperties_url": {
+			"value": "https://azuredevopsstoragedev.dfs.core.windows.net"
+		},
+		"Conn_Service_Principal_properties_typeProperties_tenant": {
+			"value": "2c1a2940-1a7c-4259-bdb1-acb301e5958b"
+		},
+		"Conn_Service_Principal_properties_typeProperties_servicePrincipalId": {
+			"value": "d1e1fcd5-55e7-4af5-a70e-6b4c06682dd6"
+		},
+		"Demo_Linkd_Service_DL_properties_typeProperties_url": {
+			"value": "https://azuredevopsstoragedev.dfs.core.windows.net"
+		},
+		"Office365_properties_typeProperties_servicePrincipalId": {
+			"value": "e2a61ea8-b430-4e11-ad1c-7ec878af45f6"
+		},
+		"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"value": "adflearningdev.database.windows.net"
+		},
+		"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"value": "adflearner"
+		},
+		"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"value": ""
 		},
 		"containerUri": {
 			"value": ""

@@ -6,69 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "AzureDevopsDFDev"
-		},
-		"AzureSqlDatabase_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase'"
-		},
-		"Demo_Linkd_Service_DL_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'Demo_Linkd_Service_DL'"
-		},
-		"Office365_servicePrincipalKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'Office365'"
-		},
-		"SQLConn_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SQLConn'"
-		},
-		"AzureKeyVaultAccountkey_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://AzureDevopsKeyValultDev.vault.azure.net/"
-		},
-		"AzureKeyVaultSQL_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://AzureDevopsKeyValultDev.vault.azure.net/"
-		},
-		"AzureKeyVaultServicePrincipal_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://demo111.vault.azure.net/"
-		},
-		"AzureVaultWithKey_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "accountkeystoragescret"
-		},
-		"Conn_Service_Principal_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://azuredevopsstoragedev.dfs.core.windows.net"
-		},
-		"Conn_Service_Principal_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2c1a2940-1a7c-4259-bdb1-acb301e5958b"
-		},
-		"Conn_Service_Principal_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "d1e1fcd5-55e7-4af5-a70e-6b4c06682dd6"
-		},
-		"Demo_Linkd_Service_DL_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://azuredevopsstoragedev.dfs.core.windows.net"
-		},
-		"Office365_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "e2a61ea8-b430-4e11-ad1c-7ec878af45f6"
-		},
-		"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
-			"type": "string",
-			"defaultValue": "adflearningdev.database.windows.net"
-		},
-		"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
-			"type": "string",
-			"defaultValue": "adflearner"
-		},
-		"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
-			"type": "secureString"
 		}
 	},
 	"variables": {
@@ -158,15 +95,13 @@
 						"inputs": [
 							{
 								"referenceName": "DelimitedText1",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSqlTable2",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -226,8 +161,7 @@
 							},
 							"dataset": {
 								"referenceName": "LookUp",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						}
 					},
@@ -352,15 +286,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable3",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSqlTable4",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -384,7 +316,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]",
-				"[concat(variables('factoryId'), '/linkedServices/SQLConn')]",
 				"[concat(variables('factoryId'), '/datasets/LookUp')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable3')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable4')]"
@@ -454,15 +385,13 @@
 						"inputs": [
 							{
 								"referenceName": "DS_Datalake",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DS_SQL",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -485,12 +414,9 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {}
+				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLConn')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable3')]",
@@ -527,9 +453,7 @@
 					"table": "Emp"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLConn')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable4')]",
@@ -566,9 +490,7 @@
 					"table": "Emp2"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLConn')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_Datalake')]",
@@ -676,9 +598,7 @@
 					"table": "Emp"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLConn')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DataLake_Foreach_Dest')]",
@@ -747,9 +667,7 @@
 					}
 				]
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureVaultWithKey')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LookUp')]",
@@ -762,23 +680,7 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLConn')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureKeyVaultAccountkey')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('AzureKeyVaultAccountkey_properties_typeProperties_baseUrl')]"
-				}
+				"schema": []
 			},
 			"dependsOn": []
 		},
@@ -790,7 +692,7 @@
 				"annotations": [],
 				"type": "AzureKeyVault",
 				"typeProperties": {
-					"baseUrl": "[parameters('AzureKeyVaultSQL_properties_typeProperties_baseUrl')]"
+					"baseUrl": "https://AzureDevopsKeyValultDev.vault.azure.net/"
 				}
 			},
 			"dependsOn": []
@@ -803,45 +705,10 @@
 				"annotations": [],
 				"type": "AzureKeyVault",
 				"typeProperties": {
-					"baseUrl": "[parameters('AzureKeyVaultServicePrincipal_properties_typeProperties_baseUrl')]"
+					"baseUrl": "https://demo111.vault.azure.net/"
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureSqlDatabase_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureVaultWithKey')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVaultAccountkey",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('AzureVaultWithKey_properties_typeProperties_connectionString_secretName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVaultAccountkey')]"
-			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Conn_Service_Principal')]",
@@ -851,9 +718,9 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('Conn_Service_Principal_properties_typeProperties_url')]",
-					"tenant": "[parameters('Conn_Service_Principal_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('Conn_Service_Principal_properties_typeProperties_servicePrincipalId')]",
+					"url": "https://azuredevopsstoragedev.dfs.core.windows.net",
+					"tenant": "2c1a2940-1a7c-4259-bdb1-acb301e5958b",
+					"servicePrincipalId": "d1e1fcd5-55e7-4af5-a70e-6b4c06682dd6",
 					"servicePrincipalKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -876,10 +743,10 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('Demo_Linkd_Service_DL_properties_typeProperties_url')]",
+					"url": "https://azuredevopsstoragedev.dfs.core.windows.net",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('Demo_Linkd_Service_DL_accountKey')]"
+						"value": "**********"
 					}
 				}
 			},
@@ -895,63 +762,10 @@
 				"typeProperties": {
 					"office365TenantId": "2c1a2940-1a7c-4259-bdb1-acb301e5958b",
 					"servicePrincipalTenantId": "2c1a2940-1a7c-4259-bdb1-acb301e5958b",
-					"servicePrincipalId": "[parameters('Office365_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalId": "e2a61ea8-b430-4e11-ad1c-7ec878af45f6",
 					"servicePrincipalKey": {
 						"type": "SecureString",
-						"value": "[parameters('Office365_servicePrincipalKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLConn')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('SQLConn_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVaultAccountkey",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "SQLPwd"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVaultAccountkey')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/adfIntegrationRunTime')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "East US",
-						"nodeSize": "Standard_D8_v3",
-						"numberOfNodes": 2,
-						"maxParallelExecutionsPerNode": 8
-					},
-					"ssisProperties": {
-						"catalogInfo": {
-							"catalogServerEndpoint": "[parameters('adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]",
-							"catalogAdminUserName": "[parameters('adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]",
-							"catalogAdminPassword": {
-								"type": "SecureString",
-								"value": "[parameters('adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
-							},
-							"catalogPricingTier": "S1"
-						},
-						"edition": "Standard",
-						"licenseType": "LicenseIncluded"
+						"value": "**********"
 					}
 				}
 			},
