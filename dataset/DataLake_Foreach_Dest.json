@@ -1,0 +1,30 @@
+{
+	"name": "DataLake_Foreach_Dest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Demo_Linkd_Service_DL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Destination",
+				"fileSystem": "sharedpath"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}
