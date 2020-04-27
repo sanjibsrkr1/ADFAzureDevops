@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Connection to your Azure Data Lake Store",
 		"linkedServiceName": {
-			"referenceName": "Conn_Service_Principal",
+			"referenceName": "Demo_Linkd_Service_DL",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {

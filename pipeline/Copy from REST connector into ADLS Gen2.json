@@ -29,7 +29,7 @@
 						"requestMethod": "GET",
 						"additionalHeaders": {
 							"Authorization": {
-								"value": "@concat('Bearer ',activity('GetBearerToken').output.access_token)",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJub25jZSI6InRnSEx6QjN2d1pwRDE3RWtEbk1lcEl0TDEyTWlfRXNfY3M2SHdGWXg3dG8iLCJhbGciOiJSUzI1NiIsIng1dCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSIsImtpZCI6IkN0VHVoTUptRDVNN0RMZHpEMnYyeDNRS1NSWSJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8yYzFhMjk0MC0xYTdjLTQyNTktYmRiMS1hY2IzMDFlNTk1OGIvIiwiaWF0IjoxNTg4MDAwMjkyLCJuYmYiOjE1ODgwMDAyOTIsImV4cCI6MTU4ODAwNDE5MiwiYWlvIjoiNDJkZ1lBamY5OTdpR3B1cy9BcGo3aE1GM2twU0FBPT0iLCJhcHBfZGlzcGxheW5hbWUiOiJTZXJ2aWNlUHJpbmNpcGFsU1BPTGlzdCIsImFwcGlkIjoiZTJhNjFlYTgtYjQzMC00ZTExLWFkMWMtN2VjODc4YWY0NWY2IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvMmMxYTI5NDAtMWE3Yy00MjU5LWJkYjEtYWNiMzAxZTU5NThiLyIsIm9pZCI6ImQyYmI0MWZmLWNkODAtNDc0Zi05NzQ4LWFjMjM3YTZkYjJmNyIsInJvbGVzIjpbIlNpdGVzLk1hbmFnZS5BbGwiXSwic3ViIjoiZDJiYjQxZmYtY2Q4MC00NzRmLTk3NDgtYWMyMzdhNmRiMmY3IiwidGlkIjoiMmMxYTI5NDAtMWE3Yy00MjU5LWJkYjEtYWNiMzAxZTU5NThiIiwidXRpIjoiQlZoZ3E2Yk9JRVN5akRITEVvUzZBQSIsInZlciI6IjEuMCIsInhtc190Y2R0IjoxNTg1NzQyNDA2fQ.L8vyBkErOHaxrCaSE85c8iOT-lAqdULEkRcZnfsfrN6cSwTZP-jUNcyp6M-usHwRp1bdcYbYQpCKRU_8Hk0xgwmyPR56g0mYrcvIcywKEUfDsn8cRP67obdu4J5iO8Wtt_QS6UXRRYa6XvumK1ecaWHJDnf7_yFNdz-sHbj9BT0rrmp6Nv8OcXw-1QDiYJx1VioXqwvHdrK3skbSsD0Laq39cmk7fiRoTN47fa7Po2JKAwypOMcSYF2u0eMHw92Lxs4dspcmvfmCeoedi39QtpYzXo08T42BK4MtEuzmglSR0DKCIuEjlKufEf7cN3sFzvgoyy5OH_vQiU_e6uYWOQ",
 								"type": "Expression"
 							}
 						}
@@ -83,12 +83,12 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://login.microsoftonline.com/microsoft.onmicrosoft.com/oauth2/token",
+					"url": "https://login.microsoftonline.com/vsarkas11outlook.onmicrosoft.com/oauth2/token",
 					"method": "POST",
 					"headers": {
 						"Content-Type": "application/x-www-form-urlencoded"
 					},
-					"body": "grant_type=client_credentials&client_id=f9689806-ee80-4208-86c3-c80f9e3a20f2&resource=https://graph.microsoft.com/.default&client_secret=ag5e0:teDJ=KO=9t_3=kYkDee8LEW3u2"
+					"body": "grant_type=client_credentials&client_id=e2a61ea8-b430-4e11-ad1c-7ec878af45f6&r&client_secret=[gX:x1pNAxZ34J-7:B7XFeDO2wrOMPeu"
 				}
 			}
 		],
