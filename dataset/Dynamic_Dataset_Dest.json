@@ -1,0 +1,21 @@
+{
+	"name": "Dynamic_Dataset_Dest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Dest_SQL_Conn",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Dest_Table_Name": {
+				"type": "string",
+				"defaultValue": "emp"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "@dataset().Dest_Table_Name"
+		}
+	}
+}
