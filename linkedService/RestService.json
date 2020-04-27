@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "http://dummy.restapiexample.com/api/v1/employees",
+			"url": "https://graph.microsoft.com/v1.0/sites/https://adflearning.sharepoint.com/sites/sandbox/Lists/test/items?$Select=Id&$expand=fields($select=Title)",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
