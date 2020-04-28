@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Connection to your Azure Data Lake Store",
 		"linkedServiceName": {
-			"referenceName": "Conn_Service_Principal",
+			"referenceName": "AzureVaultWithKey",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -18,15 +18,7 @@
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"folderPath": {
-					"value": "@dataset().Directory",
-					"type": "Expression"
-				},
-				"fileSystem": {
-					"value": "@dataset().Container",
-					"type": "Expression"
-				}
+				"type": "AzureBlobStorageLocation"
 			}
 		}
 	}
