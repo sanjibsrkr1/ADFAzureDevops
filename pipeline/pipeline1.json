@@ -5,6 +5,103 @@
 			{
 				"name": "Web1",
 				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Delete1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://management.azure.com/subscriptions/c785640c-cf17-4e2b-ba77-c980557f2b87/resourceGroups/RG_AzureDevops_Dev/providers/Microsoft.DataFactory/factories/AzureDevopsDFDev/integrationRuntimes/adfIntegrationRunTime/start?api-version=2018-06-01",
+					"method": "POST",
+					"body": {
+						"name": "test",
+						"salary": "123",
+						"age": "23"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			},
+			{
+				"name": "Execute SSIS package1",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "/ssisdb/test/package1.dtsx",
+						"type": "SSISDB"
+					},
+					"connectVia": {
+						"referenceName": "adfIntegrationRunTime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"loggingLevel": "Basic"
+				}
+			},
+			{
+				"name": "Web1_copy1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Execute SSIS package1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://management.azure.com/subscriptions/c785640c-cf17-4e2b-ba77-c980557f2b87/resourceGroups/RG_AzureDevops_Dev/providers/Microsoft.DataFactory/factories/AzureDevopsDFDev/integrationRuntimes/adfIntegrationRunTime/stop?api-version=2018-06-01",
+					"method": "POST",
+					"body": {
+						"name": "test",
+						"salary": "123",
+						"age": "23"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			},
+			{
+				"name": "Delete1",
+				"type": "Delete",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -15,12 +112,14 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "http://dummy.restapiexample.com/api/v1/create",
-					"method": "POST",
-					"body": {
-						"name": "test",
-						"salary": "123",
-						"age": "23"
+					"dataset": {
+						"referenceName": "DS_Datalake",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true
 					}
 				}
 			}
