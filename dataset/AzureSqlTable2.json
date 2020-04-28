@@ -7,6 +7,28 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": []
+		"schema": [
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Empid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sal",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Last_Update_Date",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Emp"
+		}
 	}
 }
