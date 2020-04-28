@@ -18,7 +18,9 @@
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation"
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Source",
+				"container": "sharedpath"
 			}
 		}
 	}
