@@ -84,7 +84,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable2",
+						"referenceName": "EMP",
 						"type": "DatasetReference"
 					}
 				]
