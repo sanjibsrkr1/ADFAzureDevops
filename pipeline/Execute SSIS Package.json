@@ -1,18 +1,11 @@
 {
-	"name": "pipeline1",
+	"name": "Execute SSIS Package",
 	"properties": {
 		"activities": [
 			{
-				"name": "Web1",
+				"name": "IR-Start",
 				"type": "WebActivity",
-				"dependsOn": [
-					{
-						"activity": "Delete1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -25,9 +18,7 @@
 					"url": "https://management.azure.com/subscriptions/c785640c-cf17-4e2b-ba77-c980557f2b87/resourceGroups/RG_AzureDevops_Dev/providers/Microsoft.DataFactory/factories/AzureDevopsDFDev/integrationRuntimes/adfIntegrationRunTime/start?api-version=2018-06-01",
 					"method": "POST",
 					"body": {
-						"name": "test",
-						"salary": "123",
-						"age": "23"
+						"Message": "IR Start"
 					},
 					"authentication": {
 						"type": "MSI",
@@ -36,11 +27,11 @@
 				}
 			},
 			{
-				"name": "Execute SSIS package1",
+				"name": "Execute SSIS package",
 				"type": "ExecuteSSISPackage",
 				"dependsOn": [
 					{
-						"activity": "Web1",
+						"activity": "IR-Start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -67,11 +58,11 @@
 				}
 			},
 			{
-				"name": "Web1_copy1",
+				"name": "IR-Stop",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "Execute SSIS package1",
+						"activity": "Execute SSIS package",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -96,30 +87,6 @@
 					"authentication": {
 						"type": "MSI",
 						"resource": "https://management.azure.com/"
-					}
-				}
-			},
-			{
-				"name": "Delete1",
-				"type": "Delete",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataset": {
-						"referenceName": "DS_Datalake",
-						"type": "DatasetReference"
-					},
-					"enableLogging": false,
-					"storeSettings": {
-						"type": "AzureBlobFSReadSettings",
-						"recursive": true
 					}
 				}
 			}
