@@ -37,7 +37,7 @@
 					"sink": {
 						"type": "JsonSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
+							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
 							"type": "JsonWriteSettings",
@@ -55,17 +55,7 @@
 				"outputs": [
 					{
 						"referenceName": "SinkDataset1",
-						"type": "DatasetReference",
-						"parameters": {
-							"Container": {
-								"value": "@pipeline().parameters.SinkContainer",
-								"type": "Expression"
-							},
-							"Directory": {
-								"value": "@pipeline().parameters.SinkDirectory",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				]
 			},
@@ -88,16 +78,88 @@
 					"headers": {
 						"Content-Type": "application/x-www-form-urlencoded"
 					},
-					"body": "grant_type=client_credentials&client_id=e2a61ea8-b430-4e11-ad1c-7ec878af45f6&resource=https://graph.microsoft.com&client_secret=?OZ=?jknr:iokBCIVSpAWKnHB7Pm39O0"
+					"body": "grant_type=client_credentials&client_id=e2a61ea8-b430-4e11-ad1c-7ec878af45f6&scope=https://graph.microsoft.com/.default&client_secret=?OZ=?jknr:iokBCIVSpAWKnHB7Pm39O0"
 				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CopyData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table emp",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['value'][0]['fields']['EmpName']"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['value'][0]['fields']['EmpNumber']"
+								},
+								"sink": {
+									"name": "Empid",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Json",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "EMP",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"parameters": {
 			"SinkContainer": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "sharedpath"
 			},
 			"SinkDirectory": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "source"
 			}
 		},
 		"annotations": []
