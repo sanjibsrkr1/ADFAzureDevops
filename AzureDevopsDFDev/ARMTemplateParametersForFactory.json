@@ -5,9 +5,6 @@
 		"factoryName": {
 			"value": "AzureDevopsDFDev"
 		},
-		"AzureSqlDatabase1_connectionString": {
-			"value": ""
-		},
 		"Dest_SQL_Conn_connectionString": {
 			"value": ""
 		},

@@ -11,10 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SQLConn'"
 		},
-		"AzureSqlDatabase1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
-		},
 		"Dest_SQL_Conn_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Dest_SQL_Conn'"
@@ -165,26 +161,42 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLConn",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"type": "AzureSqlDatabase",
+				"type": "AzureSqlTable",
+				"schema": [],
 				"typeProperties": {
-					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVaultSQL",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "SQLpassword"
-					}
+					"schema": "dbo",
+					"table": "Emp"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVaultSQL')]"
+				"[concat(variables('factoryId'), '/linkedServices/SQLConn')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResource')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestService')]"
 			]
 		},
 		{
@@ -255,6 +267,291 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVaultSQL')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Datalake_Source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureVaultWithKey",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "EmpData (2).csv",
+						"folderPath": "Source",
+						"container": "sharedpath"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureVaultWithKey')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureVaultWithKey",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Json",
+						"folderPath": "Source",
+						"container": "sharedpath"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"@odata.context": {
+							"type": "string"
+						},
+						"value": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"@odata.etag": {
+										"type": "string"
+									},
+									"id": {
+										"type": "string"
+									},
+									"fields@odata.context": {
+										"type": "string"
+									},
+									"fields": {
+										"type": "object",
+										"properties": {
+											"@odata.etag": {
+												"type": "string"
+											},
+											"EmpName": {
+												"type": "string"
+											},
+											"EmpNumber": {
+												"type": "number"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureVaultWithKey')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copy from REST connector into ADLS Gen2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CopyData",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "GetBearerToken",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"additionalHeaders": {
+									"Authorization": {
+										"value": "@concat('Bearer ',activity('GetBearerToken').output.access_token)",
+										"type": "Expression"
+									}
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings",
+									"quoteAllText": true
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "RestResource",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Json",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "GetBearerToken",
+						"description": "Use this Web activity to get bearer token",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://login.microsoftonline.com/2c1a2940-1a7c-4259-bdb1-acb301e5958b/oauth2/v2.0/token",
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/x-www-form-urlencoded"
+							},
+							"body": "grant_type=client_credentials&client_id=e2a61ea8-b430-4e11-ad1c-7ec878af45f6&scope=https://graph.microsoft.com/.default&client_secret=?OZ=?jknr:iokBCIVSpAWKnHB7Pm39O0"
+						}
+					}
+				],
+				"parameters": {
+					"SinkContainer": {
+						"type": "string",
+						"defaultValue": "sharedpath"
+					},
+					"SinkDirectory": {
+						"type": "string",
+						"defaultValue": "source"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/RestResource')]",
+				"[concat(variables('factoryId'), '/datasets/Json')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/My_First_Copy')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "EmpID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Empid",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Datalake_Source",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Datalake_Source')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]"
 			]
 		}
 	]

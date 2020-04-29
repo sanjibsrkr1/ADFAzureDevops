@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "AzureDevopsDFDev"
 		},
-		"AzureSqlDatabase1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
-		},
 		"Dest_SQL_Conn_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Dest_SQL_Conn'"
@@ -91,9 +87,6 @@
 					},
 					"SQLConn_connectionString": {
 						"value": "[parameters('SQLConn_connectionString')]"
-					},
-					"AzureSqlDatabase1_connectionString": {
-						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
 					"Dest_SQL_Conn_connectionString": {
 						"value": "[parameters('Dest_SQL_Conn_connectionString')]"
