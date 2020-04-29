@@ -7,17 +7,17 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "AzureDevopsDFDev"
 		},
-		"AzureSqlDatabase_connectionString": {
+		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase'"
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
 		"Demo_Linkd_Service_DL_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'Demo_Linkd_Service_DL'"
 		},
-		"Office365_servicePrincipalKey": {
+		"Dest_SQL_Conn_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'Office365'"
+			"metadata": "Secure string for 'connectionString' of 'Dest_SQL_Conn'"
 		},
 		"SQLConn_connectionString": {
 			"type": "secureString",
@@ -55,9 +55,9 @@
 			"type": "string",
 			"defaultValue": "https://azuredevopsstoragedev.dfs.core.windows.net"
 		},
-		"Office365_properties_typeProperties_servicePrincipalId": {
+		"RestService_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "e2a61ea8-b430-4e11-ad1c-7ec878af45f6"
+			"defaultValue": "https://graph.microsoft.com/v1.0/sites/803a5553-0a6f-4ba8-a665-d25ce13fbc19,86c0358f-0396-4ff0-a0f7-c3ef3d9b4204/lists/9040d9a9-b76e-478a-89bf-6f7971dc9d75/items?$Select=Id&$expand=fields($select=EmpNumber,empName)"
 		},
 		"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 			"type": "string",
@@ -97,14 +97,8 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"AzureSqlDatabase_connectionString": {
-						"value": "[parameters('AzureSqlDatabase_connectionString')]"
-					},
 					"Demo_Linkd_Service_DL_accountKey": {
 						"value": "[parameters('Demo_Linkd_Service_DL_accountKey')]"
-					},
-					"Office365_servicePrincipalKey": {
-						"value": "[parameters('Office365_servicePrincipalKey')]"
 					},
 					"SQLConn_connectionString": {
 						"value": "[parameters('SQLConn_connectionString')]"
@@ -121,8 +115,8 @@
 					"Demo_Linkd_Service_DL_properties_typeProperties_url": {
 						"value": "[parameters('Demo_Linkd_Service_DL_properties_typeProperties_url')]"
 					},
-					"Office365_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('Office365_properties_typeProperties_servicePrincipalId')]"
+					"RestService_properties_typeProperties_url": {
+						"value": "[parameters('RestService_properties_typeProperties_url')]"
 					},
 					"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 						"value": "[parameters('adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
@@ -132,18 +126,6 @@
 					},
 					"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
 						"value": "[parameters('adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
-					},
-					"AzureVaultWithKey_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('AzureVaultWithKey_properties_typeProperties_connectionString_secretName')]"
-					},
-					"Conn_Service_Principal_properties_typeProperties_url": {
-						"value": "[parameters('Conn_Service_Principal_properties_typeProperties_url')]"
-					},
-					"Conn_Service_Principal_properties_typeProperties_tenant": {
-						"value": "[parameters('Conn_Service_Principal_properties_typeProperties_tenant')]"
-					},
-					"Conn_Service_Principal_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('Conn_Service_Principal_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
@@ -162,6 +144,24 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"Dest_SQL_Conn_connectionString": {
+						"value": "[parameters('Dest_SQL_Conn_connectionString')]"
+					},
+					"AzureVaultWithKey_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('AzureVaultWithKey_properties_typeProperties_connectionString_secretName')]"
+					},
+					"Conn_Service_Principal_properties_typeProperties_url": {
+						"value": "[parameters('Conn_Service_Principal_properties_typeProperties_url')]"
+					},
+					"Conn_Service_Principal_properties_typeProperties_tenant": {
+						"value": "[parameters('Conn_Service_Principal_properties_typeProperties_tenant')]"
+					},
+					"Conn_Service_Principal_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('Conn_Service_Principal_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
