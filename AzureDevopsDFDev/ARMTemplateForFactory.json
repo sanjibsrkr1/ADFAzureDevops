@@ -328,7 +328,14 @@
 					{
 						"name": "Copy data",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Wait",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -392,6 +399,15 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Wait",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
 					}
 				],
 				"annotations": []
@@ -400,6 +416,26 @@
 				"[concat(variables('factoryId'), '/datasets/Datalake_Source')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wait')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable')]",
