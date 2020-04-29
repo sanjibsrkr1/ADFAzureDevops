@@ -38,12 +38,42 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Tablename').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@startswith(item().Table_Name,'emp')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Filter_TableName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Filtered_Table_Name",
+					"value": {
+						"value": "@activity('Filter_TableName').output",
+						"type": "Expression"
+					}
+				}
 			}
 		],
-		"parameters": {
-			"Table_Name": {
-				"type": "array"
+		"variables": {
+			"Filtered_Table_Name": {
+				"type": "Array"
 			}
 		},
 		"annotations": []
