@@ -1,0 +1,58 @@
+{
+	"name": "Json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureVaultWithKey",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Json",
+				"folderPath": "Source",
+				"container": "sharedpath"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"@odata.context": {
+					"type": "string"
+				},
+				"value": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"@odata.etag": {
+								"type": "string"
+							},
+							"id": {
+								"type": "string"
+							},
+							"fields@odata.context": {
+								"type": "string"
+							},
+							"fields": {
+								"type": "object",
+								"properties": {
+									"@odata.etag": {
+										"type": "string"
+									},
+									"EmpName": {
+										"type": "string"
+									},
+									"EmpNumber": {
+										"type": "number"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
