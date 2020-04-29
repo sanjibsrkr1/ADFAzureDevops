@@ -104,6 +104,16 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
+									"additionalColumns": [
+										{
+											"name": "",
+											"value": ""
+										},
+										{
+											"name": "",
+											"value": ""
+										}
+									],
 									"queryTimeout": "02:00:00"
 								},
 								"enableStaging": false
