@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable",
+	"name": "LookUp",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SQLConn",
@@ -7,10 +7,6 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
-		"typeProperties": {
-			"schema": "dbo",
-			"table": "Emp"
-		}
+		"schema": []
 	}
 }

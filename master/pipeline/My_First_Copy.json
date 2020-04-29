@@ -63,7 +63,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable2",
+						"referenceName": "AzureSqlTable",
 						"type": "DatasetReference"
 					}
 				]
