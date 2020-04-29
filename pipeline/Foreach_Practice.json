@@ -26,8 +26,26 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "Filter_TableName",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "TableName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
 			}
 		],
+		"parameters": {
+			"Table_Name": {
+				"type": "array"
+			}
+		},
 		"annotations": []
 	}
 }
