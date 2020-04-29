@@ -17,12 +17,14 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select TABLE_NAME from INFORMATION_SCHEMA.tables",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
 						"referenceName": "SourceTableName",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
