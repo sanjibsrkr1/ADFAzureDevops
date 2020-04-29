@@ -11,10 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
-		"Demo_Linkd_Service_DL_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'Demo_Linkd_Service_DL'"
-		},
 		"Dest_SQL_Conn_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Dest_SQL_Conn'"
@@ -50,10 +46,6 @@
 		"Conn_Service_Principal_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "d1e1fcd5-55e7-4af5-a70e-6b4c06682dd6"
-		},
-		"Demo_Linkd_Service_DL_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://azuredevopsstoragedev.dfs.core.windows.net"
 		},
 		"RestService_properties_typeProperties_url": {
 			"type": "string",
@@ -97,11 +89,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"Demo_Linkd_Service_DL_accountKey": {
-						"value": "[parameters('Demo_Linkd_Service_DL_accountKey')]"
-					},
 					"SQLConn_connectionString": {
 						"value": "[parameters('SQLConn_connectionString')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"Dest_SQL_Conn_connectionString": {
+						"value": "[parameters('Dest_SQL_Conn_connectionString')]"
 					},
 					"AzureKeyVaultAccountkey_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVaultAccountkey_properties_typeProperties_baseUrl')]"
@@ -111,9 +106,6 @@
 					},
 					"AzureKeyVaultServicePrincipal_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVaultServicePrincipal_properties_typeProperties_baseUrl')]"
-					},
-					"Demo_Linkd_Service_DL_properties_typeProperties_url": {
-						"value": "[parameters('Demo_Linkd_Service_DL_properties_typeProperties_url')]"
 					},
 					"RestService_properties_typeProperties_url": {
 						"value": "[parameters('RestService_properties_typeProperties_url')]"
@@ -126,30 +118,6 @@
 					},
 					"adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
 						"value": "[parameters('adfIntegrationRunTime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "ArmTemplate_1",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					},
-					"AzureSqlDatabase1_connectionString": {
-						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
-					},
-					"Dest_SQL_Conn_connectionString": {
-						"value": "[parameters('Dest_SQL_Conn_connectionString')]"
 					},
 					"AzureVaultWithKey_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('AzureVaultWithKey_properties_typeProperties_connectionString_secretName')]"
@@ -165,9 +133,7 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
-			]
+			"dependsOn": []
 		}
 	]
 }
