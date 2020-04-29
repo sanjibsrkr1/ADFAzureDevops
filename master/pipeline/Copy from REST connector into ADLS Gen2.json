@@ -45,7 +45,19 @@
 						}
 					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "RestResource",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Json",
+						"type": "DatasetReference"
+					}
+				]
 			},
 			{
 				"name": "GetBearerToken",

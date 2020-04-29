@@ -1,0 +1,30 @@
+{
+	"name": "Datalake_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureVaultWithKey",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EmpData (2).csv",
+				"folderPath": "Source",
+				"container": "sharedpath"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}
