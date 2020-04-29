@@ -1,5 +1,5 @@
 {
-	"name": "SinkDataset1",
+	"name": "SinkDatasetJson",
 	"properties": {
 		"description": "Connection to your Azure Data Lake Store",
 		"linkedServiceName": {

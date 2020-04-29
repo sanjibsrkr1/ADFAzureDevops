@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText1",
+	"name": "DS_CSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureVaultWithKey",

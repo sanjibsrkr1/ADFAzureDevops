@@ -1,5 +1,5 @@
 {
-	"name": "RestResource1",
+	"name": "RestResource",
 	"properties": {
 		"description": "Connection to your REST/HTTP",
 		"linkedServiceName": {

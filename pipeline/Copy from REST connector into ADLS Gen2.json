@@ -48,13 +48,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "RestResource1",
+						"referenceName": "RestResource",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "SinkDataset1",
+						"referenceName": "SinkDatasetJson",
 						"type": "DatasetReference"
 					}
 				]

@@ -78,7 +78,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "DS_CSV",
 						"type": "DatasetReference"
 					}
 				],
@@ -220,65 +220,8 @@
 					"sink": {
 						"type": "AzureSqlSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "name",
-									"type": "String"
-								},
-								"sink": {
-									"name": "name",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Empid",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Empid",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Sal",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "Sal",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "Last_Update_Date",
-									"type": "DateTime"
-								},
-								"sink": {
-									"name": "Last_Update_Date",
-									"type": "DateTime"
-								}
-							}
-						]
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "AzureSqlTable3",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AzureSqlTable4",
-						"type": "DatasetReference"
-					}
-				]
+					"enableStaging": false
+				}
 			}
 		],
 		"variables": {
