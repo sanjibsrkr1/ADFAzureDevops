@@ -5,8 +5,20 @@
 			"referenceName": "SQLConn",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"Source_Table_Name": {
+				"type": "string",
+				"defaultValue": "emp"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"table": {
+				"value": "@dataset().Source_Table_Name",
+				"type": "Expression"
+			}
+		}
 	}
 }

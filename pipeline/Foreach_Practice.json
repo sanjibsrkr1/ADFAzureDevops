@@ -121,7 +121,13 @@
 							"inputs": [
 								{
 									"referenceName": "DataDynamicSource",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"Source_Table_Name": {
+											"value": "@item().table_name",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
