@@ -1,0 +1,13 @@
+{
+	"name": "RestService",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://graph.microsoft.com/v1.0/sites/803a5553-0a6f-4ba8-a665-d25ce13fbc19,86c0358f-0396-4ff0-a0f7-c3ef3d9b4204/lists/9040d9a9-b76e-478a-89bf-6f7971dc9d75/items?$Select=Id&$expand=fields($select=EmpNumber,empName)",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
