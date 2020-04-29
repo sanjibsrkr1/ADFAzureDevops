@@ -65,9 +65,25 @@
 				"typeProperties": {
 					"variableName": "Filtered_Table_Name",
 					"value": {
-						"value": "@activity('Filter_TableName').output",
+						"value": "@activity('Filter_TableName').output.value",
 						"type": "Expression"
 					}
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"isSequential": true
 				}
 			}
 		],
