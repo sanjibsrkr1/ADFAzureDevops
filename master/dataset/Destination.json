@@ -1,17 +1,23 @@
 {
-	"name": "DelimitedText1",
+	"name": "Destination",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "DataStorageConnection",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DestinationFilePath": {
+				"type": "string",
+				"defaultValue": "https://azuredevopsstoragedev.blob.core.windows.net/sharedpath/Source/EmpData (2).csv"
+			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "Destination",
-				"fileSystem": "sharedpath"
+				"fileName": "EmpData (2).csv",
+				"folderPath": "Source"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
