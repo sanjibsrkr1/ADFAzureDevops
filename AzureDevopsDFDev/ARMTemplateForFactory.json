@@ -132,7 +132,14 @@
 						"name": "GetBearerToken",
 						"description": "Use this Web activity to get bearer token",
 						"type": "WebActivity",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Wait",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -148,6 +155,15 @@
 								"Content-Type": "application/x-www-form-urlencoded"
 							},
 							"body": "grant_type=client_credentials&client_id=e2a61ea8-b430-4e11-ad1c-7ec878af45f6&scope=https://graph.microsoft.com/.default&client_secret=?OZ=?jknr:iokBCIVSpAWKnHB7Pm39O0"
+						}
+					},
+					{
+						"name": "Wait",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 2
 						}
 					}
 				],
